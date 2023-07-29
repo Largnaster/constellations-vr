@@ -1,41 +1,39 @@
-import { HTMLAttributes } from "react";
+/* eslint-disable */
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      "a-scene": HTMLAttributes<HTMLDivElement>;
-      "a-entity": HTMLAttributes<HTMLElement>;
-      "a-box": HTMLAttributes<HTMLElement>;
-      "a-camera": HTMLAttributes<HTMLElement>;
-      "a-circle": HTMLAttributes<HTMLElement>;
-      "a-collada-model": HTMLAttributes<HTMLElement>;
-      "a-cone": HTMLAttributes<HTMLElement>;
-      "a-cursor": HTMLAttributes<HTMLElement>;
-      "a-curvedimage": HTMLAttributes<HTMLElement>;
-      "a-cylinder": HTMLAttributes<HTMLElement>;
-      "a-dodecahedron": HTMLAttributes<HTMLElement>;
-      "a-gltf-model": HTMLAttributes<HTMLElement>;
-      "a-icosahedron": HTMLAttributes<HTMLElement>;
-      "a-image": HTMLAttributes<HTMLElement>;
-      "a-light": HTMLAttributes<HTMLElement>;
-      "a-link": HTMLAttributes<HTMLElement>;
-      "a-obj-model": HTMLAttributes<HTMLElement>;
-      "a-octahedron": HTMLAttributes<HTMLElement>;
-      "a-plane": HTMLAttributes<HTMLElement>;
-      "a-ring": HTMLAttributes<HTMLElement>;
-      "a-sky": HTMLAttributes<HTMLElement>;
-      "a-sound": HTMLAttributes<HTMLElement>;
-      "a-sphere": HTMLAttributes<HTMLElement>;
-      "a-tetrahedron": HTMLAttributes<HTMLElement>;
-      "a-text": HTMLAttributes<HTMLElement>;
-      "a-torus-knot": HTMLAttributes<HTMLElement>;
-      "a-torus": HTMLAttributes<HTMLElement>;
-      "a-triangle": HTMLAttributes<HTMLElement>;
-      "a-video": HTMLAttributes<HTMLElement>;
-      "a-videosphere": HTMLAttributes<HTMLElement>;
-      "a-assets": HTMLAttributes<HTMLElement>;
-      "a-animation": HTMLAttributes<HTMLElement>;
-      "a-asset-item": HTMLAttributes<HTMLElement>;
-    }
-  }
+export as namespace JSX;
+
+export interface IntrinsicElements {
+  "a-scene": any;
+  "a-entity": any;
+  "a-box": any;
+  "a-camera": any;
+  "a-circle": any;
+  "a-collada-model": any;
+  "a-cone": any;
+  "a-cursor": any;
+  "a-curvedimage": any;
+  "a-cylinder": any;
+  "a-dodecahedron": any;
+  "a-gltf-model": any;
+  "a-icosahedron": any;
+  "a-image": any;
+  "a-light": any;
+  "a-link": any;
+  "a-obj-model": any;
+  "a-octahedron": any;
+  "a-plane": any;
+  "a-ring": any;
+  "a-sky": any;
+  "a-sound": any;
+  "a-sphere": any;
+  "a-tetrahedron": any;
+  "a-text": any;
+  "a-torus-knot": any;
+  "a-torus": any;
+  "a-triangle": any;
+  "a-video": any;
+  "a-videosphere": any;
+  "a-assets": any;
+  "a-animation": any;
+  "a-asset-item": any;
 }
