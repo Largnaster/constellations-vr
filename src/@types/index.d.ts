@@ -3,6 +3,7 @@
 export as namespace JSX;
 
 export interface IntrinsicElements {
+  AFRAME: any;
   "a-scene": any;
   "a-entity": any;
   "a-box": any;
