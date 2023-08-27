@@ -9,6 +9,7 @@ AFRAME.registerComponent("collider-check", {
   dependencies: ["raycaster"],
   init: function () {
     const element = this.el;
+    let constellationName = "";
 
     const getConstellation = (event: any) => {
       const collidedElement = event.detail.els;
@@ -21,18 +22,20 @@ AFRAME.registerComponent("collider-check", {
     };
 
     const handleConstellationClick = () => {
-      console.info("I was clicked");
+      if (!constellationName) return;
+      console.info(`Clicked on ${constellationName}`);
+      window.localStorage.setItem("constellation", constellationName);
+      window.dispatchEvent(new Event("storage"));
     };
 
     element.addEventListener("raycaster-intersection", (event: any) => {
-      console.info("Raycast enter");
       const constellation = getConstellation(event);
       if (!constellation) return;
 
+      constellationName = constellation.id;
       constellation.addEventListener("click", handleConstellationClick);
     });
     element.addEventListener("raycaster-intersection-cleared", (event: any) => {
-      console.info("Raycast exit");
       const constellation = getConstellation(event);
       if (!constellation) return;
 
@@ -46,28 +49,51 @@ function App() {
   const [selectedConstellation, setSelectedConstellation] =
     useState<ConstellationInfo>(constellationsInfo[0]);
 
-  window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      setPauseMenuOpen(!pauseMenuOpen);
-    }
-  });
-
   const calcOverflowPosition = (position: number) => {
     if (position === 0) return position + 0.1;
     return position + Math.sign(position) * 0.1;
   };
+
+  window.addEventListener("storage", () => {
+    const constellation = window.localStorage.getItem("constellation");
+    if (constellation) {
+      setSelectedConstellation(
+        constellationsInfo.find(
+          (constellationInfo) =>
+            constellationInfo.name.toLowerCase() === constellation
+        )!
+      );
+    }
+  });
+
+  useEffect(() => {
+    const handleEscapeKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setPauseMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleEscapeKey);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, []);
 
   useEffect(() => {
     const pauseMenu = document.getElementById("pauseMenu");
     if (pauseMenu) {
       if (pauseMenuOpen) {
         pauseMenu.setAttribute("visible", "true");
-        setSelectedConstellation(constellationsInfo[0]);
       } else {
         pauseMenu.setAttribute("visible", "false");
       }
     }
   }, [pauseMenuOpen]);
+
+  useEffect(() => {
+    if (selectedConstellation) setPauseMenuOpen(true);
+  }, [selectedConstellation]);
 
   const getRandomColor = (): string => {
     const colors = [
@@ -165,42 +191,32 @@ function App() {
           </a-entity>
           <a-entity
             id="pauseMenu"
-            position="0 0 -1"
-            geometry="primitive: plane; width: 0.2; height: 0.1"
-            material="color: gray; opacity: 0.5"
+            position="0 0 -11"
+            geometry="primitive: plane; width: 37; height: 19"
+            material="color: gray; opacity: 0.4"
           >
-            <a-text
-              value="PAUSED"
-              align="center"
-              position="0 0 0.1"
-              color="white"
-            />
             <a-entity
               id={`${selectedConstellation.name.toLowerCase()}_description`}
               visible={!!selectedConstellation}
             >
               <a-plane
                 color="#fff"
-                position={`${calcOverflowPosition(
-                  selectedConstellation.position.x
-                )} ${calcOverflowPosition(
-                  selectedConstellation.position.y
-                )} ${calcOverflowPosition(selectedConstellation.position.z)}`}
-                width="15"
-                height="24"
+                position={"0 -2 0.1"}
+                width="10"
+                height="10"
               >
                 <a-image
                   src={`#${selectedConstellation.name.toLowerCase()}_img`}
-                  position="0 4.5 0.2"
-                  width="15"
-                  height="15"
+                  position="0 4.5 0.1"
+                  width="10"
+                  height="9"
                 />
                 <a-text
                   value={selectedConstellation.description}
                   align="center"
                   color="black"
-                  position="0 -4 0.3"
-                  scale="3 3 1"
+                  position="0 -2.5 0.1"
+                  scale="2 2 1"
                 />
               </a-plane>
             </a-entity>
