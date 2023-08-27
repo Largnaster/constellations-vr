@@ -47,12 +47,7 @@ AFRAME.registerComponent("collider-check", {
 function App() {
   const [pauseMenuOpen, setPauseMenuOpen] = useState(false);
   const [selectedConstellation, setSelectedConstellation] =
-    useState<ConstellationInfo>(constellationsInfo[0]);
-
-  const calcOverflowPosition = (position: number) => {
-    if (position === 0) return position + 0.1;
-    return position + Math.sign(position) * 0.1;
-  };
+    useState<ConstellationInfo | null>(null);
 
   window.addEventListener("storage", () => {
     const constellation = window.localStorage.getItem("constellation");
@@ -196,7 +191,7 @@ function App() {
             material="color: gray; opacity: 0.4"
           >
             <a-entity
-              id={`${selectedConstellation.name.toLowerCase()}_description`}
+              id={`${selectedConstellation?.name.toLowerCase()}_description`}
               visible={!!selectedConstellation}
             >
               <a-plane
@@ -206,13 +201,13 @@ function App() {
                 height="10"
               >
                 <a-image
-                  src={`#${selectedConstellation.name.toLowerCase()}_img`}
+                  src={`#${selectedConstellation?.name.toLowerCase()}_img`}
                   position="0 4.5 0.1"
                   width="10"
                   height="9"
                 />
                 <a-text
-                  value={selectedConstellation.description}
+                  value={selectedConstellation?.description}
                   align="center"
                   color="black"
                   position="0 -2.5 0.1"
