@@ -16,6 +16,7 @@ AFRAME.registerComponent("collider-check", {
       const collidedElement = event.detail.els;
       if (!collidedElement) return;
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const constellation = collidedElement.find((element: any) =>
         constellationsNames.includes(element.id)
       );
