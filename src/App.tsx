@@ -94,21 +94,6 @@ function App() {
     if (selectedConstellation) setPauseMenuOpen(true);
   }, [selectedConstellation]);
 
-  const getRandomColor = (): string => {
-    const colors = [
-      "red",
-      "blue",
-      "green",
-      "yellow",
-      "orange",
-      "purple",
-      "pink",
-      "brown",
-      "gray",
-    ];
-    return colors[Math.floor(Math.random() * colors.length)];
-  };
-  // event-set__click={`_event: click; color: ${getRandomColor()}`}
   return (
     <>
       <a-scene stats>
@@ -152,11 +137,6 @@ function App() {
         <a-sky src="#starmap" radius="100" />
         <a-sky src="#boundaries" radius="99" transparent />
         <a-sky src="#figures" radius="99" transparent />
-        <a-entity
-          geometry="primitive: plane; width: 30; height: 6"
-          material={`color: ${getRandomColor()}; opacity: 0.6`}
-          position="0 0 0.2"
-        />
 
         {constellationsInfo.map((constellation: ConstellationInfo) => (
           <Fragment key={constellation.name}>
