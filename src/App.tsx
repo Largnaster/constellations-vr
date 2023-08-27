@@ -178,6 +178,14 @@ function App() {
               id={`${selectedConstellation?.name.toLowerCase()}_description`}
               visible={!!selectedConstellation}
             >
+              <a-text
+                value={"PRESS ESC TO CLOSE"}
+                align="left"
+                color="white"
+                baseline="center"
+                position="-14 8 0.1"
+                scale="3 3 1"
+              />
               <a-plane
                 color="#fff"
                 position={"0 -2 0.1"}
