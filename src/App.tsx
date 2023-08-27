@@ -5,6 +5,9 @@ const constellationsNames = constellationsInfo.map((constellation) =>
   constellation.name.toLocaleLowerCase()
 );
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+declare const AFRAME: any;
+
 AFRAME.registerComponent("collider-check", {
   dependencies: ["raycaster"],
   init: function () {
