@@ -11,6 +11,7 @@ AFRAME.registerComponent("collider-check", {
     const element = this.el;
     let constellationName = "";
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const getConstellation = (event: any) => {
       const collidedElement = event.detail.els;
       if (!collidedElement) return;
@@ -28,6 +29,7 @@ AFRAME.registerComponent("collider-check", {
       window.dispatchEvent(new Event("storage"));
     };
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     element.addEventListener("raycaster-intersection", (event: any) => {
       const constellation = getConstellation(event);
       if (!constellation) return;
@@ -35,6 +37,7 @@ AFRAME.registerComponent("collider-check", {
       constellationName = constellation.id;
       constellation.addEventListener("click", handleConstellationClick);
     });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     element.addEventListener("raycaster-intersection-cleared", (event: any) => {
       const constellation = getConstellation(event);
       if (!constellation) return;
